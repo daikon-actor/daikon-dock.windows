@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QuickBar 設定ファイル",
+  "description": "data フォルダ直下の *.json はファイル名順にすべて読み込まれます（*.schema.json は除く）。",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "description": "すべて省略可。複数ファイルにある場合は後のファイルが優先。",
+      "additionalProperties": false,
+      "properties": {
+        "triggerKey": {
+          "enum": [
+            "ctrl",
+            "lctrl",
+            "rctrl",
+            "shift",
+            "lshift",
+            "rshift",
+            "alt",
+            "lalt",
+            "ralt",
+            "win",
+            "lwin",
+            "rwin"
+          ],
+          "default": "ctrl",
+          "description": "長押しで表示を切り替えるキー。l / r が付くと左右どちらかだけ"
+        },
+        "holdMs": {
+          "type": "integer",
+          "minimum": 150,
+          "default": 600,
+          "description": "トリガーキーを長押しと判定するミリ秒"
+        },
+        "animationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 180,
+          "description": "アニメーション時間（0 でアニメなし）"
+        },
+        "hideOnLaunch": {
+          "type": "boolean",
+          "default": true,
+          "description": "起動後に自動で隠す"
+        },
+        "align": {
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "default": "center",
+          "description": "アイコンの並び位置"
+        },
+        "language": {
+          "type": "string",
+          "examples": [
+            "en",
+            "ja"
+          ],
+          "description": "表示言語（lang フォルダのファイル名）。省略時は build.bat で選んだ言語"
+        },
+        "iconSize": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 128,
+          "default": 24,
+          "description": "アイコンの大きさ（100% 表示時のピクセル）"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0.2,
+          "maximum": 1.0,
+          "default": 1.0,
+          "description": "不透明度"
+        },
+        "background": {
+          "$ref": "#/definitions/color",
+          "default": "#202020",
+          "description": "背景色"
+        },
+        "hover": {
+          "$ref": "#/definitions/color",
+          "default": "#3a3a3a",
+          "description": "マウスを乗せたときの色"
+        },
+        "pressed": {
+          "$ref": "#/definitions/color",
+          "default": "#2e2e2e",
+          "description": "押したときの色"
+        },
+        "border": {
+          "$ref": "#/definitions/color",
+          "default": "#404040",
+          "description": "境界線・区切り線の色"
+        },
+        "foreground": {
+          "$ref": "#/definitions/color",
+          "default": "#ffffff",
+          "description": "文字・矢印の色"
+        }
+      }
+    },
+    "apps": {
+      "type": "array",
+      "description": "バーに並べる項目（上から順に左から並ぶ）",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "title": "アプリ / ファイル / フォルダ / URL",
+            "required": [
+              "path"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "マウスを乗せたときに出る名前"
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "description": "exe・.lnk・フォルダ・ファイル・URL・ms-settings: など。notepad.exe のように名前だけでも可。%USERPROFILE% などの環境変数が使える"
+              },
+              "args": {
+                "type": "string",
+                "description": "起動時の引数"
+              },
+              "workdir": {
+                "type": "string",
+                "description": "作業フォルダ（省略時は exe のあるフォルダ）"
+              },
+              "icon": {
+                "type": "string",
+                "description": "アイコンを変更。.png / .ico / .exe、または shell32.dll,4 のような番号付き"
+              },
+              "admin": {
+                "type": "boolean",
+                "default": false,
+                "description": "true で管理者として起動"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "title": "区切り線",
+            "required": [
+              "separator"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "separator": {
+                "const": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "color": {
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+    }
+  }
+}

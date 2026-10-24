@@ -1,0 +1,13 @@
+# 改行は CRLF に統一（特に .bat は LF だと cmd.exe が誤動作することがある）
+* text=auto eol=crlf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.cs  text eol=crlf diff=csharp
+*.sln text eol=crlf
+
+*.ico binary
+*.png binary
+*.jpg binary
+*.exe binary
+*.dll binary

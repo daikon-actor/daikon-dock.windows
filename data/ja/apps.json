@@ -1,0 +1,60 @@
+{
+  "$schema": "./apps.schema.json",
+  "settings": {
+    "holdMs": 600,
+    "animationMs": 180,
+    "hideOnLaunch": true,
+    "align": "center",
+    "iconSize": 24
+  },
+  "apps": [
+    {
+      "name": "メモ帳",
+      "path": "notepad.exe"
+    },
+    {
+      "name": "電卓",
+      "path": "calc.exe"
+    },
+    {
+      "name": "ペイント",
+      "path": "mspaint.exe"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "エクスプローラー",
+      "path": "explorer.exe"
+    },
+    {
+      "name": "ドキュメント",
+      "path": "%USERPROFILE%\\Documents"
+    },
+    {
+      "name": "ダウンロード",
+      "path": "%USERPROFILE%/Downloads"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "コマンドプロンプト",
+      "path": "cmd.exe",
+      "workdir": "%USERPROFILE%"
+    },
+    {
+      "name": "PowerShell (管理者)",
+      "path": "powershell.exe",
+      "admin": true
+    },
+    {
+      "name": "Windowsの設定",
+      "path": "ms-settings:"
+    },
+    {
+      "name": "Google",
+      "path": "https://www.google.com"
+    }
+  ]
+}

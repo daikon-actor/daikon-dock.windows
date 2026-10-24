@@ -1,0 +1,60 @@
+{
+  "$schema": "./apps.schema.json",
+  "settings": {
+    "holdMs": 600,
+    "animationMs": 180,
+    "hideOnLaunch": true,
+    "align": "center",
+    "iconSize": 24
+  },
+  "apps": [
+    {
+      "name": "Notepad",
+      "path": "notepad.exe"
+    },
+    {
+      "name": "Calculator",
+      "path": "calc.exe"
+    },
+    {
+      "name": "Paint",
+      "path": "mspaint.exe"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "File Explorer",
+      "path": "explorer.exe"
+    },
+    {
+      "name": "Documents",
+      "path": "%USERPROFILE%\\Documents"
+    },
+    {
+      "name": "Downloads",
+      "path": "%USERPROFILE%/Downloads"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "Command Prompt",
+      "path": "cmd.exe",
+      "workdir": "%USERPROFILE%"
+    },
+    {
+      "name": "PowerShell (Admin)",
+      "path": "powershell.exe",
+      "admin": true
+    },
+    {
+      "name": "Windows Settings",
+      "path": "ms-settings:"
+    },
+    {
+      "name": "Google",
+      "path": "https://www.google.com"
+    }
+  ]
+}

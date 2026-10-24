@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img"
+     aria-label="QuickBar stylized blue Q icon">
+  <defs>
+    <linearGradient id="ring" x1="0.12" y1="0.88" x2="0.88" y2="0.12" objectBoundingBox="true">
+      <stop offset="0" stop-color="#1248AD"/>
+      <stop offset="0.38" stop-color="#237BDD"/>
+      <stop offset="0.72" stop-color="#75C9F4"/>
+      <stop offset="1" stop-color="#C4F5FA"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#194DAD"/>
+      <stop offset="0.48" stop-color="#53A9F0"/>
+      <stop offset="1" stop-color="#D4F8FC"/>
+    </linearGradient>
+    <linearGradient id="tail" x1="0" y1="0.9" x2="0.95" y2="0.05">
+      <stop stop-color="#0F51B6"/>
+      <stop offset="0.48" stop-color="#398CE3"/>
+      <stop offset="1" stop-color="#B9F0FA"/>
+    </linearGradient>
+  </defs>
+  <!-- A clean, single silhouette rather than tracing image details. -->
+  <path fill="url(#ring)" fill-rule="evenodd"
+        d="M256 22 C126 22 24 124 24 254 C24 385 126 487 256 487 C386 487 488 385 488 254 C488 124 386 22 256 22 Z M256 115 C335 115 397 176 397 254 C397 333 335 394 256 394 C177 394 115 333 115 254 C115 176 177 115 256 115 Z"/>
+  <!-- A broad upper highlight keeps the glass character without faceting. -->
+  <path d="M62 191 C86 90 169 39 261 39 C351 39 417 88 449 157 C410 104 345 75 264 75 C173 75 110 116 62 191 Z"
+        fill="#C7F1FD" opacity="0.48"/>
+  <!-- Small inner edge highlight. -->
+  <path
+    d="M118 245 C124 168 180 111 257 111 C328 111 382 154 396 220 C372 161 321 132 257 132 C183 132 137 181 118 245 Z"
+    fill="url(#rim)" opacity="0.7"/>
+  <!-- The distinctive Q tail: two smooth curves, no polygon tracing. -->
+  <path
+    d="M203 319 C251 279 299 280 340 320 C392 370 435 418 498 452 C469 482 420 492 378 472 C323 446 287 400 248 364 C230 348 215 337 203 319 Z"
+    fill="url(#tail)"/>
+  <path
+    d="M215 317 C266 288 305 303 347 344 C390 386 432 429 485 453 C435 447 398 418 355 377 C303 327 273 307 215 317 Z"
+    fill="#C0F1FC" opacity="0.62"/>
+</svg>

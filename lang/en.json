@@ -1,0 +1,19 @@
+{
+  "tray.text": "QuickBar (hold {0} to show)",
+  "menu.toggle": "Show / Hide",
+  "menu.reload": "Reload settings",
+  "menu.openData": "Open data folder",
+  "menu.startup": "Start with Windows",
+  "menu.exit": "Exit",
+  "tip.hide": "Hide (or hold {0})",
+  "error.configLoad": "Could not load the settings files.\n\n{0}",
+  "error.launch": "Could not start:\n{0}\n\n{1}",
+  "error.hook": "Could not install the keyboard hook. Holding the trigger key will not work.",
+  "sample.notepad": "Notepad",
+  "sample.calc": "Calculator",
+  "sample.explorer": "File Explorer",
+  "error.triggerKey": "Unknown triggerKey \"{0}\". Ctrl is used instead.",
+  "warn.overflow": "{0} of {1} items do not fit in the bar and are not shown.\nPlease remove some items.",
+  "key.left": "Left {0}",
+  "key.right": "Right {0}"
+}

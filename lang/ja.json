@@ -1,0 +1,19 @@
+{
+  "tray.text": "QuickBar ({0}長押しで表示)",
+  "menu.toggle": "表示 / 隠す",
+  "menu.reload": "設定を再読み込み",
+  "menu.openData": "data フォルダを開く",
+  "menu.startup": "Windows 起動時に開始",
+  "menu.exit": "終了",
+  "tip.hide": "隠す ({0}長押しでも切替)",
+  "error.configLoad": "設定ファイルを読み込めませんでした。\n\n{0}",
+  "error.launch": "起動できませんでした。\n{0}\n\n{1}",
+  "error.hook": "キーボードフックを設定できませんでした。長押しでの表示は使えません。",
+  "sample.notepad": "メモ帳",
+  "sample.calc": "電卓",
+  "sample.explorer": "エクスプローラー",
+  "error.triggerKey": "triggerKey \"{0}\" は使えません。代わりに Ctrl を使います。",
+  "warn.overflow": "{1} 個中 {0} 個がバーに入りきらないため表示されません。\n項目を減らしてください。",
+  "key.left": "左{0}",
+  "key.right": "右{0}"
+}

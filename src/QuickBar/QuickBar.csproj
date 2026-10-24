@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Rider での開発用プロジェクト。利用者向けの正式ビルドは build.bat（Windows付属の csc.exe）。
+    csc.exe は C# 5 までなので LangVersion=5 に固定し、C# 6 以降の構文を Rider 上でエラーにする。
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>5</LangVersion>
+    <RootNamespace>QuickBar</RootNamespace>
+    <AssemblyName>QuickBar</AssemblyName>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <Deterministic>true</Deterministic>
+    <!-- バージョン等は AssemblyInfo.cs で管理（build.bat と共通にするため自動生成しない） -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <!--
+    既定の表示言語（build.bat の言語選択に相当）。en / ja
+    Rider で日本語版を動かすときはここを ja にするか、dotnet build -p:QuickBarLang=ja
+  -->
+  <PropertyGroup>
+    <QuickBarLang Condition="'$(QuickBarLang)' == ''">en</QuickBarLang>
+    <DefineConstants Condition="'$(QuickBarLang)' == 'ja'">$(DefineConstants);QUICKBAR_LANG_JA</DefineConstants>
+  </PropertyGroup>
+
+  <!-- 静的チェック -->
+  <PropertyGroup>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms"/>
+    <Reference Include="System.Drawing"/>
+    <Reference Include="System.Web.Extensions"/>
+  </ItemGroup>
+
+  <!-- .NET Framework 4.8 Developer Pack が無い環境でもビルドできるように（開発時のみ・配布物には含まれない） -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all"/>
+  </ItemGroup>
+
+  <!-- build.bat の /resource と同じ名前で埋め込む（トレイアイコン・言語ファイルの予備） -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\app.ico" LogicalName="QuickBar.app.ico"/>
+    <EmbeddedResource Include="..\..\lang\*.json" LogicalName="QuickBar.lang.%(Filename)%(Extension)"/>
+  </ItemGroup>
+
+  <!-- Rider から実行したとき用に、サンプル設定と言語ファイルを出力先にコピー -->
+  <ItemGroup>
+    <None Include="..\..\data\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\..\data\$(QuickBarLang)\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\..\lang\*.json" Link="lang\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+
+</Project>
