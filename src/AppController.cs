@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>
     /// 常駐部分のつなぎ役。トレイアイコン・メニュー・長押し検出・設定・バーを結び付ける。
@@ -13,8 +13,8 @@ namespace QuickBar
     internal sealed class AppController : ApplicationContext
     {
         private const string RunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private const string RunValueName = "QuickBar";
-        private const string IconResourceName = "QuickBar.app.ico";
+        private const string RunValueName = "DaikonDock";
+        private const string IconResourceName = "DaikonDock.app.ico";
 
         private readonly string _appDir;
         private readonly ConfigStore _config;
@@ -44,10 +44,10 @@ namespace QuickBar
             _detector = new HoldKeyDetector();
             _detector.LongPress += delegate { Toggle(); };
             if (!_detector.IsHooked)
-                MessageBox.Show(Strings.Get("error.hook"), "QuickBar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Strings.Get("error.hook"), "DaikonDock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             _menu = new ContextMenuStrip();
-            ToolStripMenuItem versionItem = new ToolStripMenuItem("QuickBar " + Application.ProductVersion);
+            ToolStripMenuItem versionItem = new ToolStripMenuItem("DaikonDock " + Application.ProductVersion);
             versionItem.Enabled = false; // バージョン表示のみ
             _menu.Items.Add(versionItem);
             _menu.Items.Add(new ToolStripSeparator());
@@ -116,7 +116,7 @@ namespace QuickBar
             {
                 MessageBox.Show(
                     Strings.Format("error.configLoad", string.Join("\n\n", result.Errors.ToArray())),
-                    "QuickBar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "DaikonDock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             _lastHiddenCount = 0; // 設定を読み直したら、入りきらなければ必ず知らせる
@@ -131,7 +131,7 @@ namespace QuickBar
             _lastHiddenCount = hidden;
             if (!increased) return;
             MessageBox.Show(Strings.Format("warn.overflow", hidden, _bar.ItemCount),
-                            "QuickBar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            "DaikonDock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void OnItemClicked(AppEntry entry)
@@ -144,7 +144,7 @@ namespace QuickBar
             else if (error != null)
             {
                 MessageBox.Show(Strings.Format("error.launch", entry.Target, error),
-                                "QuickBar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                "DaikonDock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -185,7 +185,7 @@ namespace QuickBar
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "QuickBar");
+                MessageBox.Show(ex.Message, "DaikonDock");
             }
         }
 

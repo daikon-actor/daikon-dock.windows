@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>
     /// 長押しで表示を切り替えるキー（設定の triggerKey）。修飾キーだけを対象にする。

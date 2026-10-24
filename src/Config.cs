@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Web.Script.Serialization;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>バーに並べる1項目（アプリ / 区切り線）。</summary>
     internal sealed class AppEntry

@@ -1,4 +1,4 @@
-# QuickBar コーディング規約（Rider / dotnet build / dotnet format が読む）
+# DaikonDock コーディング規約（Rider / dotnet build / dotnet format が読む）
 root = true
 
 [*]
@@ -83,5 +83,5 @@ dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.CA1712.severity = none
 
 # Win32 の宣言は名前を API と揃えるため命名ルールの対象外
-[src/QuickBar/NativeMethods.cs]
+[src/NativeMethods.cs]
 dotnet_naming_rule.constants_pascal.severity = none

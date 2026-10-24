@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "QuickBar 設定ファイル",
+  "title": "DaikonDock 設定ファイル",
   "description": "data フォルダ直下の *.json はファイル名順にすべて読み込まれます（*.schema.json は除く）。",
   "type": "object",
   "properties": {

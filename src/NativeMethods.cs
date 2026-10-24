@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>Win32 API の宣言。</summary>
     internal static class NativeMethods

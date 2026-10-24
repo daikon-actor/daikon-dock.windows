@@ -1,4 +1,4 @@
-# QuickBar 設計メモ
+# DaikonDock 設計メモ
 
 利用者向けの説明は README.md（英語）。ここには「なぜこう作ったか」と内部の仕組みをまとめる。
 
@@ -24,15 +24,14 @@
 ├─ build.bat                利用者向けの正式ビルド（csc.exe）→ dist\
 ├─ README.md                利用者向けの説明（英語）
 ├─ LICENSE.md               MIT License
-├─ QuickBar.sln             Rider 用
+├─ DaikonDock.sln           Rider 用
 ├─ Directory.Build.props    obj / bin を build\ に出す
 ├─ .editorconfig            コーディング規約・解析ルール
-├─ assets/icon.svg          アイコンの元データ
 ├─ data/apps.schema.json    設定ファイルの JSON Schema（dist\data に毎回コピー）
 ├─ data/en, data/ja         言語別のサンプル apps.json（dist\data に無いときだけコピー）
 ├─ lang/en.json, ja.json    画面の文言（exe に埋め込み + dist\lang に無いときだけコピー）
 ├─ docs/DESIGN.md           このファイル
-└─ src/QuickBar/            ソース（下記）
+└─ src/                     ソース（下記）
 ```
 
 ## 3. ソースの構成
@@ -134,7 +133,7 @@
   3. exe 隣の `lang\en.json`
   4. 埋め込みの `en`
   5. キー名そのもの
-- 既定の言語は build.bat で選ぶ（`/define:QUICKBAR_LANG_JA`）。設定の `language` で上書きできる。
+- 既定の言語は build.bat で選ぶ（`/define:DAIKONDOCK_LANG_JA`）。設定の `language` で上書きできる。
 - `Strings.Format` は言語ファイルの `{}` の書き間違いでは落ちない（そのまま表示する）。
 - 文言を足すときは `lang\` のすべてのファイルにキーを追加する。
 - 対象外：Windows が返すエラーの詳細は、OS の表示言語のまま。README は英語のみ。コードのコメントとスキーマは日本語。
@@ -144,8 +143,9 @@
 ### build.bat（正式）
 
 1. 言語を英語で問い合わせる（`/lang:en` `/lang:ja` で省略できる。`/nopause` で最後の pause を省く）。
-2. `csc.exe /recurse:src\QuickBar\*.cs` でまとめてコンパイルする。`.cs` を増やしても bat の修正は不要。
+2. `csc.exe /recurse:src\*.cs` でまとめてコンパイルする。`.cs` を増やしても bat の修正は不要。
 3. 埋め込むもの：`app.ico`（exe のアイコンとトレイ用のリソース）、`lang\*.json`。
+   `app.ico` は `src/Resources/app.png`（256×256）から 16〜256px の 8 サイズを作ってまとめたもの。アイコンを変えるときは png を差し替えて ico を作り直す。
 4. `dist\` にコピーするもの：
 
 | コピー元 | コピー先 | 方針 |
@@ -160,13 +160,13 @@
 - `LangVersion=5` で、C# 6 以降の構文をエラーにする。
 - 静的チェックは `AnalysisLevel=latest-recommended` と `EnforceCodeStyleInBuild`。Release では警告をすべてエラーにする。
 - `Directory.Build.props` で obj / bin を `build\` に出す。`src` 内に生成された .cs を、build.bat の `/recurse` が拾わないようにするため。
-- 既定の言語は csproj の `QuickBarLang`（en / ja）。
+- 既定の言語は csproj の `DaikonDockLang`（en / ja）。
 
 ### バージョン
 
-- `src/QuickBar/AssemblyInfo.cs` だけで管理する。csc.exe はこの属性から exe のバージョン情報（プロパティの「詳細」タブ）を作る。
+- `src/AssemblyInfo.cs` だけで管理する。csc.exe はこの属性から exe のバージョン情報（プロパティの「詳細」タブ）を作る。
 - csproj は `GenerateAssemblyInfo=false` にして、Rider でも同じファイルを使う（自動生成すると属性が重複するため）。
-- トレイメニューの先頭に「QuickBar 1.0.0」のように表示する（`AssemblyInformationalVersion`）。
+- トレイメニューの先頭に「DaikonDock 1.0.0」のように表示する（`AssemblyInformationalVersion`）。
 - リリースのたびに 3 つの属性（AssemblyVersion / AssemblyFileVersion / AssemblyInformationalVersion）を更新する。
 
 ## 11. 採用しなかった案

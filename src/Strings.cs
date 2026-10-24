@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Web.Script.Serialization;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>
     /// 画面に出す文言。lang\{言語}.json から読む。
@@ -13,14 +13,14 @@ namespace QuickBar
     /// </summary>
     internal static class Strings
     {
-        // build.bat で選んだ言語が既定値になる（/define:QUICKBAR_LANG_JA）。設定の "language" で上書きできる。
-#if QUICKBAR_LANG_JA
+        // build.bat で選んだ言語が既定値になる（/define:DAIKONDOCK_LANG_JA）。設定の "language" で上書きできる。
+#if DAIKONDOCK_LANG_JA
         public const string DefaultLanguage = "ja";
 #else
         public const string DefaultLanguage = "en";
 #endif
         private const string FallbackLanguage = "en";
-        private const string ResourcePrefix = "QuickBar.lang.";
+        private const string ResourcePrefix = "DaikonDock.lang.";
 
         private static readonly List<IDictionary<string, string>> _tables = new List<IDictionary<string, string>>();
 

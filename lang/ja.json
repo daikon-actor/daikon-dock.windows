@@ -1,5 +1,5 @@
 {
-  "tray.text": "QuickBar ({0}長押しで表示)",
+  "tray.text": "DaikonDock ({0}長押しで表示)",
   "menu.toggle": "表示 / 隠す",
   "menu.reload": "設定を再読み込み",
   "menu.openData": "data フォルダを開く",

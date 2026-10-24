@@ -1,6 +1,6 @@
 @echo off
-rem QuickBar build script (uses csc.exe bundled with Windows / .NET Framework 4.x)
-rem Output: dist\QuickBar.exe
+rem DaikonDock build script (uses csc.exe bundled with Windows / .NET Framework 4.x)
+rem Output: dist\DaikonDock.exe
 rem Usage : build.bat [/lang:en or /lang:ja] [/nopause]
 setlocal EnableDelayedExpansion
 cd /d "%~dp0"
@@ -30,23 +30,23 @@ if not exist "%CSC%" (
   goto :fail
 )
 
-set "SRC=src\QuickBar"
+set "SRC=src"
 set "ICON=%SRC%\Resources\app.ico"
 
 rem Default language of the exe (can be changed later with "language" in settings)
 set "DEFINE="
-if "%QB_LANG%"=="ja" set "DEFINE=/define:QUICKBAR_LANG_JA"
+if "%QB_LANG%"=="ja" set "DEFINE=/define:DAIKONDOCK_LANG_JA"
 
 rem Embed every lang\*.json as a fallback
 set "LANGRES="
-for %%F in (lang\*.json) do set "LANGRES=!LANGRES! /resource:%%F,QuickBar.lang.%%~nxF"
+for %%F in (lang\*.json) do set "LANGRES=!LANGRES! /resource:%%F,DaikonDock.lang.%%~nxF"
 
 if not exist "dist" mkdir "dist"
 
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /codepage:65001 %DEFINE% ^
-  /win32icon:%ICON% /resource:%ICON%,QuickBar.app.ico %LANGRES% ^
+  /win32icon:%ICON% /resource:%ICON%,DaikonDock.app.ico %LANGRES% ^
   /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll ^
-  /out:dist\QuickBar.exe /recurse:%SRC%\*.cs
+  /out:dist\DaikonDock.exe /recurse:%SRC%\*.cs
 if errorlevel 1 (
   echo.
   echo Build FAILED.
@@ -69,7 +69,7 @@ copy /y "README.md" "dist\" >nul
 if exist "LICENSE.md" copy /y "LICENSE.md" "dist\" >nul
 
 echo.
-echo Build OK: dist\QuickBar.exe
+echo Build OK: dist\DaikonDock.exe
 if not defined NOPAUSE pause
 exit /b 0
 

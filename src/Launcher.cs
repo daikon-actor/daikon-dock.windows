@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>項目を起動する。</summary>
     internal static class Launcher

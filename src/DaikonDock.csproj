@@ -8,8 +8,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <LangVersion>5</LangVersion>
-    <RootNamespace>QuickBar</RootNamespace>
-    <AssemblyName>QuickBar</AssemblyName>
+    <RootNamespace>DaikonDock</RootNamespace>
+    <AssemblyName>DaikonDock</AssemblyName>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <ApplicationIcon>Resources\app.ico</ApplicationIcon>
@@ -20,11 +20,11 @@
 
   <!--
     既定の表示言語（build.bat の言語選択に相当）。en / ja
-    Rider で日本語版を動かすときはここを ja にするか、dotnet build -p:QuickBarLang=ja
+    Rider で日本語版を動かすときはここを ja にするか、dotnet build -p:DaikonDockLang=ja
   -->
   <PropertyGroup>
-    <QuickBarLang Condition="'$(QuickBarLang)' == ''">en</QuickBarLang>
-    <DefineConstants Condition="'$(QuickBarLang)' == 'ja'">$(DefineConstants);QUICKBAR_LANG_JA</DefineConstants>
+    <DaikonDockLang Condition="'$(DaikonDockLang)' == ''">en</DaikonDockLang>
+    <DefineConstants Condition="'$(DaikonDockLang)' == 'ja'">$(DefineConstants);DAIKONDOCK_LANG_JA</DefineConstants>
   </PropertyGroup>
 
   <!-- 静的チェック -->
@@ -47,15 +47,15 @@
 
   <!-- build.bat の /resource と同じ名前で埋め込む（トレイアイコン・言語ファイルの予備） -->
   <ItemGroup>
-    <EmbeddedResource Include="Resources\app.ico" LogicalName="QuickBar.app.ico"/>
-    <EmbeddedResource Include="..\..\lang\*.json" LogicalName="QuickBar.lang.%(Filename)%(Extension)"/>
+    <EmbeddedResource Include="Resources\app.ico" LogicalName="DaikonDock.app.ico"/>
+    <EmbeddedResource Include="..\lang\*.json" LogicalName="DaikonDock.lang.%(Filename)%(Extension)"/>
   </ItemGroup>
 
   <!-- Rider から実行したとき用に、サンプル設定と言語ファイルを出力先にコピー -->
   <ItemGroup>
-    <None Include="..\..\data\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
-    <None Include="..\..\data\$(QuickBarLang)\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
-    <None Include="..\..\lang\*.json" Link="lang\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\data\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\data\$(DaikonDockLang)\*.json" Link="data\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="..\lang\*.json" Link="lang\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
 
 </Project>

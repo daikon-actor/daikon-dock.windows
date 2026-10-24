@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace QuickBar
+namespace DaikonDock
 {
     // BarForm の描画部分
     internal sealed partial class BarForm

@@ -1,4 +1,4 @@
-# QuickBar
+# DaikonDock
 
 Hold **Ctrl** and a launcher bar slides out right above the Windows taskbar, with the same size as the taskbar.
 Click an icon to start the app. Hold Ctrl again, or press the "∨" button at the right end of the bar, to hide it.
@@ -8,9 +8,9 @@ The key to hold can be changed with `triggerKey` (Ctrl, Shift, Alt or Win).
 
 1. Double-click `build.bat`
 2. Choose the language (`[1] English` / `[2] Japanese`)
-3. `dist\QuickBar.exe` is created, together with sample settings in `dist\data\` and language files in `dist\lang\`
-4. Put the `dist` folder anywhere you like (e.g. `C:\Tools\QuickBar`) and run `QuickBar.exe`.
-   When the icon appears in the notification area, QuickBar is running.
+3. `dist\DaikonDock.exe` is created, together with sample settings in `dist\data\` and language files in `dist\lang\`
+4. Put the `dist` folder anywhere you like (e.g. `C:\Tools\DaikonDock`) and run `DaikonDock.exe`.
+   When the icon appears in the notification area, DaikonDock is running.
 
 The build uses the C# compiler (csc.exe) that ships with .NET Framework 4 on Windows 10 / 11, so Visual Studio is not
 required. Running `build.bat` again never overwrites the files in `dist\data\` and `dist\lang\`.
@@ -31,7 +31,7 @@ bar. When Alt or Win is used, releasing it after the bar appears does not open t
 
 ## Settings `data/*.json`
 
-All `.json` files directly under the `data` folder next to `QuickBar.exe` are loaded in file name order. One
+All `.json` files directly under the `data` folder next to `DaikonDock.exe` are loaded in file name order. One
 `apps.json` is fine, and so is splitting them like `10_work.json` and `20_hobby.json`. Changes are applied the next time
 the bar is shown.
 
@@ -82,7 +82,7 @@ loaded as a settings file. Its descriptions are in Japanese.)
 | `separator` |          | `true` for a separator line                                                                             |
 
 - In JSON, write `\` as `\\`. `/` also works.
-- Environment variables such as `%USERPROFILE%` can be used. Relative paths are relative to the folder of QuickBar.exe.
+- Environment variables such as `%USERPROFILE%` can be used. Relative paths are relative to the folder of DaikonDock.exe.
 - Comments and trailing commas are not allowed in JSON. If loading fails, a dialog shows the error.
 - If no icon can be obtained, the first letter of the name is shown.
 
@@ -102,19 +102,19 @@ loaded as a settings file. Its descriptions are in Japanese.)
 
 ## Languages `lang/*.json`
 
-The texts shown by QuickBar (menu, tooltips, error dialogs) are in `lang\en.json` and `lang\ja.json`.
+The texts shown by DaikonDock (menu, tooltips, error dialogs) are in `lang\en.json` and `lang\ja.json`.
 
 - The language chosen in `build.bat` is the default. Change it later with `"language"` in `settings`.
 - You can edit the texts in `dist\lang\`, or add a language by creating e.g. `dist\lang\fr.json` and setting
   `"language": "fr"`. Changes to language files are applied with "Reload settings" in the menu.
-- Missing keys fall back to English. The files are also embedded in the exe, so QuickBar works even without the
+- Missing keys fall back to English. The files are also embedded in the exe, so DaikonDock works even without the
   `lang` folder.
 - Detailed error messages that come from Windows (e.g. "file not found") are in the Windows display language.
 
 ## Notes
 
-- While an app running as administrator is in the foreground, Windows does not let QuickBar detect the key. Run
-  QuickBar as administrator if you need this.
+- While an app running as administrator is in the foreground, Windows does not let DaikonDock detect the key. Run
+  DaikonDock as administrator if you need this.
 - The bar follows the taskbar of the primary monitor (top, left and right taskbars are supported too).
 - Items that do not fit in the bar are not shown, and a warning dialog tells you how many. Each icon takes a square as
   wide as the taskbar is tall (about 39 icons on a 1920 px wide screen at 100% scaling).
@@ -129,16 +129,15 @@ The texts shown by QuickBar (menu, tooltips, error dialogs) are in `lang\en.json
 ├─ build.bat                Official build for users (csc.exe / C# 5) -> dist\
 ├─ README.md                This file
 ├─ LICENSE.md               MIT License
-├─ QuickBar.sln             For Rider
+├─ DaikonDock.sln           For Rider
 ├─ Directory.Build.props    Puts obj / bin under build\
 ├─ .editorconfig            Coding conventions and analyzer rules
-├─ assets/icon.svg          Source of the app icon
 ├─ docs/DESIGN.md           Design notes (in Japanese)
 ├─ data/apps.schema.json    JSON schema for the settings files (copied to dist\data)
 ├─ lang/                    UI texts (en.json, ja.json)
 ├─ data/en, data/ja         Sample apps.json per language, copied to dist\data by build.bat
-└─ src/QuickBar/
-    ├─ QuickBar.csproj      For Rider (LangVersion=5)
+└─ src/
+    ├─ DaikonDock.csproj    For Rider (LangVersion=5)
     ├─ AssemblyInfo.cs      Version and product information
     ├─ Program.cs           Entry point, single-instance check
     ├─ AppController.cs     Tray, menu, wiring of the parts
@@ -150,7 +149,9 @@ The texts shown by QuickBar (menu, tooltips, error dialogs) are in `lang\en.json
     ├─ IconLoader.cs        Icon extraction
     ├─ Launcher.cs          Starting apps, path resolution
     ├─ NativeMethods.cs     Win32 API declarations
-    └─ Resources/app.ico    App icon (embedded in the exe and used for the tray)
+    └─ Resources/
+        ├─ app.png          Source image of the app icon (256 x 256)
+        └─ app.ico          App icon made from app.png (embedded in the exe and used for the tray)
 ```
 
 ### Rules
@@ -160,10 +161,10 @@ The texts shown by QuickBar (menu, tooltips, error dialogs) are in `lang\en.json
 - **No external packages.** Use only what .NET Framework 4.8 provides. (ReferenceAssemblies in the csproj is only for
   building in Rider and is not shipped.)
 - **Every UI text goes through `Strings`.** When adding a key, add it to every file in `lang\`.
-- Adding a `.cs` file does not require changing build.bat (everything under `src\QuickBar` is compiled).
-- Rider builds in English by default. Set `QuickBarLang` to `ja` in the csproj (or `dotnet build -p:QuickBarLang=ja`)
+- Adding a `.cs` file does not require changing build.bat (everything under `src` is compiled).
+- Rider builds in English by default. Set `DaikonDockLang` to `ja` in the csproj (or `dotnet build -p:DaikonDockLang=ja`)
   for the Japanese default.
-- **Version:** update the three version attributes in `src\QuickBar\AssemblyInfo.cs` for each release. The version is
+- **Version:** update the three version attributes in `src\AssemblyInfo.cs` for each release. The version is
   shown in the exe properties and at the top of the tray menu.
 - Make sure `build.bat` succeeds before committing.
 
@@ -173,5 +174,5 @@ The texts shown by QuickBar (menu, tooltips, error dialogs) are in `lang\en.json
 |------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Rider / `dotnet build`                               | C# 5 syntax, .NET analyzers (latest-recommended), .editorconfig styles. All warnings are errors in Release  |
 | `dotnet format --verify-no-changes`                  | Formatting matches .editorconfig                                                                            |
-| `jb inspectcode QuickBar.sln -o=build/inspect.sarif` | Same inspections as Rider, from the command line (`dotnet tool install -g JetBrains.ReSharper.GlobalTools`) |
+| `jb inspectcode DaikonDock.sln -o=build/inspect.sarif` | Same inspections as Rider, from the command line (`dotnet tool install -g JetBrains.ReSharper.GlobalTools`) |
 | `build.bat`                                          | Final check that it builds on a user's machine                                                              |

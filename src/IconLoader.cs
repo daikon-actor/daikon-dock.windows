@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>
     /// 各項目のアイコンを取得し、表示サイズのビットマップにして返す。

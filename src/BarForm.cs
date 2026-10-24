@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace QuickBar
+namespace DaikonDock
 {
     /// <summary>
     /// タスクバーの上に出るランチャーバー。配置・アニメーション・マウス操作を担当する。
@@ -53,7 +53,7 @@ namespace QuickBar
         {
             _appDir = appDir;
 
-            Text = "QuickBar";
+            Text = "DaikonDock";
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
